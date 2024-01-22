@@ -6,6 +6,7 @@ import { UsersService } from 'src/users/users.service';
 @Module({
   imports: [
     JwtModule.register({
+      global: true,
       secret: `${process.env.TOKEN_JWT}`,
       signOptions: { expiresIn: '7 days' },
     }),
