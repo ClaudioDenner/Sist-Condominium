@@ -1,15 +1,21 @@
 import { Injectable } from '@nestjs/common';
 import { CreateAuthDto } from './dto/create-auth.dto';
 import { UpdateAuthDto } from './dto/update-auth.dto';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
-  create(createAuthDto: CreateAuthDto) {
-    return 'This action adds a new auth';
+  constructor(private readonly jwtService: JwtService) {}
+  async createToken(createAuthDto: CreateAuthDto) {
+    const { email } = createAuthDto;
+    const token = await this.jwtService.signAsync({
+      email,
+    });
+    return `${token}`;
   }
 
-  findAll() {
-    return `This action returns all auth`;
+  async findAll() {
+    return 'get';
   }
 
   findOne(id: number) {
