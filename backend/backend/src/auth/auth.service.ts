@@ -8,10 +8,14 @@ export class AuthService {
   constructor(private readonly jwtService: JwtService) {}
   async createToken(createAuthDto: CreateAuthDto) {
     const { email } = createAuthDto;
-    const token = await this.jwtService.signAsync({
-      email,
-    });
-    return `${token}`;
+    try {
+      const token = await this.jwtService.signAsync({
+        email,
+      });
+      return `${token}`;
+    } catch (error) {
+      return error;
+    }
   }
 
   async findAll() {
