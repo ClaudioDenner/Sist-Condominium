@@ -1,0 +1,17 @@
+
+
+services:
+  mysql:
+    image: mysql:oraclelinux8
+    environment:
+      - DB_NAME=condominio
+      - USER_NAME=admin
+      - DB_PASS=admin
+    ports:
+      - 3306:3306
+    volumes:
+      - volumeDocker:/app/volume
+
+volumes:
+  volumeDocker:
+    
