@@ -4,6 +4,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Users } from './entities/users.entity';
+import * as bcrypt from 'bcrypt';
 //export type User = any;
 @Injectable()
 export class UsersService {
@@ -25,15 +26,27 @@ export class UsersService {
     },
   ];
   */
-  create(createUserDto: CreateUserDto) {
-    return 'This action adds a new user';
+  async create(createUserDto: CreateUserDto) {
+    const { email, pass } = createUserDto;
+
+    //salt é a força do hash
+    const salt = await bcrypt.genSalt();
+
+    //gerando hash a partir da senha recebida pelo usuário
+    const password = await bcrypt.hash(pass, salt);
+
+    this.usersRepository
+      .createQueryBuilder()
+      .insert()
+      .into(Users)
+      .values({ email, password })
+      .execute();
   }
   findAll() {
     return this.usersRepository.find();
   }
 
   async findOne(email: string) {
-    //return this.users.find((user) => user.email === email);
     return this.usersRepository.findOneBy({ email });
   }
 
