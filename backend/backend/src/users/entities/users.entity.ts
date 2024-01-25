@@ -7,9 +7,12 @@ export class Users {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ unique: true })
   email: string;
 
   @Column()
   password: string;
+
+  @Column()
+  level: string;
 }

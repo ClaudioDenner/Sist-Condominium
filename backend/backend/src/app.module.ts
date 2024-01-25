@@ -19,7 +19,7 @@ import { Users } from './users/entities/users.entity';
       password: 'root',
       database: 'Condominio',
       entities: [Users],
-      synchronize: true,
+      synchronize: false,
     }),
   ],
   controllers: [AppController],
