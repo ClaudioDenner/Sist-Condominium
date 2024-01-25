@@ -18,10 +18,12 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "typeorm:ts":"typeorm-ts-node-esm",
-    "migration:create":"npm run typeorm:ts migration:create -- ./db/typeorm/migrations/migrate",
-    "migration:run":"npm run typeorm:ts migration:run -- -d ./db/typeorm/data-source.ts",
-    "migration:down":"npm run typeorm:ts migration:revert -- -d ./db/typeorm/data-source.ts"
+    "typeorm:ts": "typeorm-ts-node-esm",
+    "migration:create": "npm run typeorm:ts migration:create -- ./db/typeorm/migrations/migrate",
+    "migration:run": "npm run typeorm:ts migration:run -- -d ./db/typeorm/data-source.ts",
+    "migration:down": "npm run typeorm:ts migration:revert -- -d ./db/typeorm/data-source.ts",
+    "seed:create": "ts-node ./node_modules/typeorm-extension/bin/cli.cjs seed:create -r ./db/typeorm/seeds --name seeder",
+    "seed:run": "ts-node ./node_modules/typeorm-extension/bin/cli.cjs seed:run -d ./db/typeorm/data-source.ts"
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",
@@ -38,7 +40,8 @@
     "mysql2": "^3.8.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.1",
-    "typeorm": "^0.3.19"
+    "typeorm": "^0.3.19",
+    "typeorm-extension": "^3.4.0"
   },
   "devDependencies": {
     "@nestjs/cli": "^10.0.0",

@@ -1,6 +1,8 @@
-import { DataSource } from 'typeorm';
+import { DataSource, DataSourceOptions } from 'typeorm';
+import { SeederOptions } from 'typeorm-extension';
+import { MainSeeder } from './main-seeder';
 
-const dataSource = new DataSource({
+export const options: DataSourceOptions & SeederOptions = {
   type: 'mysql',
   host: 'localhost',
   port: 3306,
@@ -8,6 +10,9 @@ const dataSource = new DataSource({
   password: 'root',
   database: 'Condominio',
   migrations: [`${__dirname}/migrations/**/*.ts`],
-});
+  seeds: [MainSeeder],
+};
+
+const dataSource = new DataSource(options);
 
 export default dataSource;
