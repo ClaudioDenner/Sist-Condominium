@@ -5,11 +5,14 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Users } from './entities/users.entity';
 import * as bcrypt from 'bcrypt';
+import { BadRequestException } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
 //export type User = any;
 @Injectable()
 export class UsersService {
   constructor(
     @InjectRepository(Users) private usersRepository: Repository<Users>,
+    private jwtService: JwtService,
   ) {}
   /*
   private readonly users = [
@@ -27,7 +30,7 @@ export class UsersService {
   ];
   */
   async create(createUserDto: CreateUserDto) {
-    const { email, pass } = createUserDto;
+    const { email, pass, level } = createUserDto;
 
     //salt é a força do hash
     const salt = await bcrypt.genSalt();
@@ -35,12 +38,18 @@ export class UsersService {
     //gerando hash a partir da senha recebida pelo usuário
     const password = await bcrypt.hash(pass, salt);
 
-    this.usersRepository
-      .createQueryBuilder()
-      .insert()
-      .into(Users)
-      .values({ email, password })
-      .execute();
+    try {
+      const query = this.usersRepository
+        .createQueryBuilder()
+        .insert()
+        .into(Users)
+        .values({ email, password, level })
+        .execute();
+
+      return query;
+    } catch (error) {
+      return BadRequestException;
+    }
   }
   findAll() {
     return this.usersRepository.find();

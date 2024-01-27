@@ -19,19 +19,20 @@ export class AuthService {
     if (!compare) {
       throw new UnauthorizedException();
     }
-    const { password, ...result } = await user;
+    const { password, ...result } = user;
 
     return this.createToken(result);
   }
 
   async createToken(payload) {
-    const { userId, email } = payload;
+    const { userId, email, level } = payload;
     try {
-      const token = await this.jwtService.sign({
+      const token = this.jwtService.sign({
         sub: userId,
         email,
+        roles: level,
       });
-      return { token: token };
+      return token;
     } catch (error) {
       return error;
     }
