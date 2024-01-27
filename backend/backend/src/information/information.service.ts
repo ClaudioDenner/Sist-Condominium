@@ -50,10 +50,31 @@ export class InformationService {
   }
 
   update(id: number, updateInformationDto: UpdateInformationDto) {
-    return `This action updates a #${id} information`;
+    const { body, title, date } = updateInformationDto;
+    try {
+      const query = this.informationRepository
+        .createQueryBuilder()
+        .update(Information)
+        .set({ body, title, date })
+        .where('id = :id', { id })
+        .execute();
+      return { query };
+    } catch (error) {
+      return error;
+    }
   }
 
   remove(id: number) {
-    return `This action removes a #${id} information`;
+    try {
+      const query = this.informationRepository
+        .createQueryBuilder()
+        .delete()
+        .from(Information)
+        .where('id = :id', { id })
+        .execute();
+      return { query };
+    } catch (error) {
+      return error;
+    }
   }
 }
