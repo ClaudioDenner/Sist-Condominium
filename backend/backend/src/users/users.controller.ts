@@ -17,6 +17,7 @@ import { RolesGuard } from 'src/guards/roles.guard';
 import { Role } from 'src/enums/role.enum';
 import { Roles } from 'src/decorators/roles.decorator';
 @UseGuards(AuthGuard, RolesGuard)
+@Roles(Role.Admin)
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
@@ -26,7 +27,6 @@ export class UsersController {
     return this.usersService.create(createUserDto);
   }
 
-  @Roles(Role.Admin)
   @Get()
   async findAll(@Headers('authorization') header) {
     return this.usersService.findAll();
