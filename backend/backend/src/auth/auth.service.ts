@@ -25,10 +25,10 @@ export class AuthService {
   }
 
   async createToken(payload) {
-    const { userId, email, level } = payload;
+    const { id, email, level } = payload;
     try {
       const token = this.jwtService.sign({
-        sub: userId,
+        id,
         email,
         roles: level,
       });

@@ -1,19 +1,52 @@
 import { Injectable } from '@nestjs/common';
 import { CreateInformationDto } from './dto/create-information.dto';
 import { UpdateInformationDto } from './dto/update-information.dto';
-
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Information } from './entities/information.entity';
 @Injectable()
 export class InformationService {
-  create(createInformationDto: CreateInformationDto) {
-    return 'This action adds a new information';
+  constructor(
+    @InjectRepository(Information)
+    private informationRepository: Repository<Information>,
+  ) {}
+  async create(createInformationDto: CreateInformationDto, id) {
+    const { title, body, date } = createInformationDto;
+    try {
+      const query = await this.informationRepository
+        .createQueryBuilder()
+        .insert()
+        .into(Information)
+        .values({ title, body, date, user: id })
+        .execute();
+      return query;
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
   }
 
-  findAll() {
-    return `This action returns all information`;
+  async findAll() {
+    try {
+      const query = await this.informationRepository.find({
+        order: { id: 'desc' },
+      });
+      return query;
+    } catch (error) {
+      return error;
+    }
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} information`;
+  async findOne(id: number) {
+    try {
+      const query = await this.informationRepository.find({
+        where: { id },
+        order: { id: 'desc' },
+      });
+      return query;
+    } catch (error) {
+      return error;
+    }
   }
 
   update(id: number, updateInformationDto: UpdateInformationDto) {

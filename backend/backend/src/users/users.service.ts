@@ -14,21 +14,7 @@ export class UsersService {
     @InjectRepository(Users) private usersRepository: Repository<Users>,
     private jwtService: JwtService,
   ) {}
-  /*
-  private readonly users = [
-    {
-      userId: 1,
-      email: 'claudiodenner2@gmail.com',
-      password: '125abcS@',
-    },
 
-    {
-      userId: 2,
-      email: 'maria',
-      password: 'guess',
-    },
-  ];
-  */
   async create(createUserDto: CreateUserDto) {
     const { email, pass, level } = createUserDto;
 

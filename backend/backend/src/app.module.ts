@@ -6,6 +6,7 @@ import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Users } from './users/entities/users.entity';
+import { Information } from './information/entities/information.entity';
 import { InformationModule } from './information/information.module';
 @Module({
   imports: [
@@ -19,7 +20,7 @@ import { InformationModule } from './information/information.module';
       username: 'root',
       password: 'root',
       database: 'Condominio',
-      entities: [Users],
+      entities: [Users, Information],
       synchronize: false,
     }),
     InformationModule,
