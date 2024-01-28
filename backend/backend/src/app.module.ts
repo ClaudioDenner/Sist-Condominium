@@ -8,6 +8,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Users } from './users/entities/users.entity';
 import { Information } from './information/entities/information.entity';
 import { InformationModule } from './information/information.module';
+import { ConciergeModule } from './concierge/concierge.module';
 @Module({
   imports: [
     ConfigModule.forRoot(),
@@ -24,6 +25,7 @@ import { InformationModule } from './information/information.module';
       synchronize: false,
     }),
     InformationModule,
+    ConciergeModule,
   ],
   controllers: [AppController],
   providers: [AppService],
