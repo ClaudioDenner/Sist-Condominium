@@ -25,14 +25,12 @@ export class UsersService {
     const password = await bcrypt.hash(pass, salt);
 
     try {
-      const query = this.usersRepository
-        .createQueryBuilder()
-        .insert()
-        .into(Users)
-        .values({ email, password, level })
-        .execute();
-
-      return query;
+      const query = this.usersRepository.insert({
+        email,
+        password,
+        level,
+      });
+      return { status: 'registro feito com sucesso' };
     } catch (error) {
       return BadRequestException;
     }
@@ -49,7 +47,7 @@ export class UsersService {
     return `This action updates a #${id} user`;
   }
 
-  remove(id: number) {
+  async remove(id: number) {
     return `This action removes a #${id} user`;
   }
 }

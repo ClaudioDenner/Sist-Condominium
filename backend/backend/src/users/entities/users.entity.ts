@@ -13,6 +13,6 @@ export class Users {
   @Column()
   password: string;
 
-  @Column()
-  level: string;
+  @Column({ nullable: true })
+  level?: string;
 }

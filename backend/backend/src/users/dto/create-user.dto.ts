@@ -12,5 +12,5 @@ export class CreateUserDto {
   pass: string;
 
   @IsString()
-  level: string;
+  level?: string;
 }
