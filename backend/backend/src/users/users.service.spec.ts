@@ -12,7 +12,7 @@ describe('UsersService', () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [UsersService, useRepositoryEntityMock, JwtService],
     }).compile();
-
+    //
     service = module.get<UsersService>(UsersService);
   });
 
