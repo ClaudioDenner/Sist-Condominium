@@ -9,6 +9,6 @@ async function bootstrap() {
     origin: '*' /*in production set whats domain can access this api */,
     allowedHeaders: 'Content-Type,Authorization',
   });
-  await app.listen(3000);
+  await app.listen(3001);
 }
 bootstrap();

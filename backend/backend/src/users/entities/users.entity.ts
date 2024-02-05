@@ -15,4 +15,7 @@ export class Users {
 
   @Column({ nullable: true })
   level?: string;
+
+  //@OneToMany(() => Information, (info) => info.user, { cascade: true })
+  //informations: Information[];
 }

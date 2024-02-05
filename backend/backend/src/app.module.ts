@@ -9,6 +9,8 @@ import { Users } from './users/entities/users.entity';
 import { Information } from './information/entities/information.entity';
 import { InformationModule } from './information/information.module';
 import { ConciergeModule } from './concierge/concierge.module';
+import { FinancesModule } from './finances/finances.module';
+import { Finance } from './finances/entities/finance.entity';
 @Module({
   imports: [
     ConfigModule.forRoot(),
@@ -21,11 +23,12 @@ import { ConciergeModule } from './concierge/concierge.module';
       username: 'root',
       password: 'root',
       database: 'Condominio',
-      entities: [Users, Information],
+      entities: [Users, Information, Finance],
       synchronize: false,
     }),
     InformationModule,
     ConciergeModule,
+    FinancesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
