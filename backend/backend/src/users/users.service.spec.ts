@@ -1,9 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { UsersService } from './users.service';
 import { JwtService } from '@nestjs/jwt';
-import { useRepositoryEntityMock } from '../testing/users-repository-mock';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UsersListMock } from '../testing/users-list';
+import { useRepositoryEntityMock } from '../testing/users-repository-mock';
 
 describe('UsersService', () => {
   let service: UsersService;

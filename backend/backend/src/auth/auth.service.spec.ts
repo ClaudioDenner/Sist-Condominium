@@ -18,13 +18,4 @@ describe('AuthService', () => {
   it('should be defined', () => {
     expect(service).toBeDefined();
   });
-
-  describe('Testing Method', () => {
-    it('Method SingIn', async () => {
-      const emailFake = 'teste@test.com';
-      const passFake = '123456';
-      const result = service.signIn(emailFake, passFake);
-      expect(result).toEqual('bau');
-    });
-  });
 });

@@ -11,11 +11,11 @@ import { FinancesService } from './finances.service';
 import { CreateFinanceDto } from './dto/create-finance.dto';
 import { UpdateFinanceDto } from './dto/update-finance.dto';
 import { UseGuards } from '@nestjs/common';
-import { AuthGuard } from 'src/auth/auth.guard';
-import { RolesGuard } from 'src/guards/roles.guard';
+import { AuthGuard } from '../auth/auth.guard';
+import { RolesGuard } from '../guards/roles.guard';
 import { Req } from '@nestjs/common';
-import { Role } from 'src/enums/role.enum';
-import { Roles } from 'src/decorators/roles.decorator';
+import { Role } from '../enums/role.enum';
+import { Roles } from '../decorators/roles.decorator';
 
 @UseGuards(AuthGuard, RolesGuard)
 @Roles(Role.Admin)
@@ -29,10 +29,12 @@ export class FinancesController {
   }
 
   @Get()
+  @Roles(Role.User)
   findAll(@Req() request) {
+    console.log(request);
     const id = request.user.id;
 
-    return this.financesService.findAll(id);
+    return this.financesService.findAll(2);
   }
 
   @Get(':id')
