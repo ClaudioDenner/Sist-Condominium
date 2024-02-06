@@ -1,20 +1,20 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
 @Entity({
-  name: 'informations',
+  name: 'finances',
 })
-export class Information {
+export class Finance {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
-  title: string;
+  expiration: string;
 
   @Column()
-  body: string;
+  value: number;
 
   @Column()
-  date: string;
+  status: string;
 
   @Column()
   user: number;

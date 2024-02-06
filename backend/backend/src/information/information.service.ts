@@ -31,6 +31,7 @@ export class InformationService {
       const query = await this.informationRepository.find({
         order: { id: 'desc' },
       });
+
       return query;
     } catch (error) {
       return error;

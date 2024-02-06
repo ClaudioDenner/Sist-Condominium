@@ -1,6 +1,8 @@
 FROM node:19-slim
-WORKDIR /app
-COPY . /app
+WORKDIR /backend
+COPY . /backend
 EXPOSE 3000
 RUN npm i
-CMD [ "npm","run","start:dev"]
+RUN npm run build
+RUN npm run migration:run
+CMD [ "npm","run","start"]
