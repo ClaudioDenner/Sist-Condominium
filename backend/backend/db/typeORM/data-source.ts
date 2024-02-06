@@ -3,11 +3,11 @@ import { SeederOptions } from 'typeorm-extension';
 
 export const options: DataSourceOptions & SeederOptions = {
   type: 'mysql',
-  host: 'localhost',
-  port: 3306,
-  username: 'root',
-  password: 'root',
-  database: 'Condominio',
+  host: process.env.DB_HOST,
+  port: +process.env.DB_PORT,
+  username: process.env.DB_ROOT,
+  password: process.env.PASS,
+  database: process.env.DB_NAME,
   migrations: [`${__dirname}/migrations/**/*.ts`],
 };
 
