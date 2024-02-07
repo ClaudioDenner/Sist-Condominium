@@ -21,7 +21,7 @@ import { Finance } from './finances/entities/finance.entity';
       host: process.env.DB_HOST,
       port: +process.env.DB_PORT,
       username: process.env.DB_ROOT,
-      password: process.env.PASS,
+      password: process.env.DB_PASS,
       database: process.env.DB_NAME,
       entities: [Users, Information, Finance],
       synchronize: false,
